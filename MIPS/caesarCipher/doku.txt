@@ -1,0 +1,23 @@
+Timo Homburg Mn:458502
+
+Algorithmus: CaesarverschlÃ¼sselung
+
+Die CaesarverschlÃ¼sselung verschlÃ¼sselt Textstrings indem sie sie Asciizeichen fÃ¼r Asciizeichen einliest und dabei den Asciiwert um die Zahl des SchlÃ¼ssels erhÃ¶ht/erniedrigt.
+Hierbei ist die VerschlÃ¼sselung auf die Asciiwerte des groÃŸen und kleinen Alphabets (und dem Leerzeichen) von mir begrenzt worden.
+Andere eingegebene Asciizeichen werden mit einer Fehlermeldung abgefangen und eine weitere Aufforderung zur Eingabe des Strings erscheint.
+Die SchlÃ¼ssel kÃ¶nnen in beliebiger GrÃ¶ÃŸe eingegeben werden.
+Das Programm berechnet automatisch die Verschiebung im Alphabet aus den eingegebenen Werten.
+Bitte beachten Sie: Das Programm kann nur Strings bis zu einer Länge von 128 Zeichen bearbeiten.
+Ein Probelauf im XSpim Simulator brachte folgende Ergebnisse für die Durchlauflänge:
+27 Anweisungen an den Prozessor bis der String und die Verschiebung eingelesen sind
+15 Anweisungen (oder mehr) um die Eingabe der Verschiebung in eine Zahl kleiner 26 und größer 0 umzuwandeln
+7 Anweisungen um ein Leerzeichen umzuwandeln
+13 Anweisungen für einen Großbuchstaben
+15 Anweisungen für einen Kleinbuchstaben
+Darin inbegriffen sind Prüfungen auf die Asciigrenzen und das Rückspeichern der Buchstaben in den Databereich
+14 Anweisungen für die Ausgabe und Vorbereitung des nächsten Einlesens
+Und evtl. 5 Anweisungen bei fehlerhafter Eingabe für eine Errormessage
+Bei Annahme das Leerzeichen zu 20%,
+Großbuchstaben zu 10% und Kleinbuchstaben zu 70% auftreten
+lässt sich der Mittelwert
+bei 0,1*7+0,2*13+0,7*15=13,8 festlegen.
