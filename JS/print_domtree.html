@@ -1,0 +1,75 @@
+<html>
+<head><title>Aufstellen des DOM-Baumes aus einem Beispieldokument</title>
+<script type="text/javascript">
+function domTree(doc, current, indent)
+{
+  /*Existiert ein aktuelles Element kann mit dem Durchlaufen des Baumes begonnen werden*/
+  if (current)
+  {
+    var j;
+    var tagName=current.tagName;
+      /*Wenn ein Tagname existiert wird der Tagname in spitzen Klammern in das Dokument geschrieben*/
+    if (tagName){
+      doc.write("&lt;"+tagName);
+      /*Auslesen der Attribute des Knotens und formatierte Ausgabe*/
+      for(j=0;j<current.attributes.length;j++){
+	  doc.write(" "+current.attributes[j].name+"="+current.attributes[j].value);
+      }
+      doc.write("&gt;");
+      /*Wenn der Knoten einen Wert hat soll dieser ausgegeben werden*/
+      if(current.nodeValue!=null)
+	  doc.write(current.nodeValue);
+    }
+    else{
+      /*Wenn kein Tagname vorliegt z.B. bei einem Textknoten soll der Text sofern existent ausgegeben werden*/
+      if(current.nodeValue!=null)
+	  doc.write(current.nodeValue);
+      else
+	  doc.writeln("???");
+    }
+
+    var i=0;
+    while (current.childNodes[i])
+    {
+      doc.write("<br/>\n");
+      for (j=0; j<indent; j++)
+      {
+        doc.write("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#166");
+      }					
+      if (tagName)
+        doc.write("&nbsp;&nbsp;&nbsp;&nbsp;");
+
+      /*Rekursiver Aufruf für jedes existierende Kind*/
+      domTree(doc, current.childNodes[i], indent+1);
+      i++;
+    }
+    doc.writeln("<br/>");
+    /*Nötiger Einrückabstand wird berechnet und in das Dokument geschrieben*/
+    for (j=0; j<indent-1; j++)
+    {
+      doc.write("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#166");
+    }			
+    doc.writeln("&nbsp;&nbsp;");
+    /*Schließender Tag*/
+    if (tagName)
+      doc.writeln("&lt;/"+tagName+"&gt;");
+  }
+}</script></head>
+<body bgcolor="white" onLoad="domTree(document,document.getElementsByTagName('html')[0],1)">
+<h1>Anmeldeformular</h1>
+<form name="Login" method="post" onsubmit="return dom(document)">
+<table width="50%">
+<tr><td>Anrede:</td><td><input type="radio" name="radio1" value="Miss">Miss</input>
+<input type="radio" name="radio2" value="Mister">Mister</input></td></tr>
+<tr><td>Family name:</td><td><input type="text" name="nachname" maxlength="70"/></td></tr>
+<tr><td>First name:</td><td><input type="text" name="vorname" maxlength="70"/></td></tr>
+<tr><td>Phone number:</td><td><input type="text" name="telefon"/></td></tr>
+<tr><td>Street:</td><td><input type="text" name="strasse"/></td></tr>
+<tr><td>Postcode:</td><td><input type="text" name="plz" maxlength="5"/></td></tr>
+<tr><td>City:</td><td><input type="text" name="ort"/></td></tr>
+<tr><td>Email address:</td><td><input type="text" name="email"/></td></tr>
+<tr><td colspan="2" align="center"><input type="submit" name="b1" value="Login"/>
+<input type="reset" name="b2" value="Reset" onClick="reset()"/></td></tr></table>
+</form>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<html><head><title>Dynamisches Inhaltsverzeichnis mit DOM</title>
+<script type="text/javascript">
+function costumize(header,counter,child){
+	  child.setAttribute("id", counter);       //Setze die ID als Counter
+          var newh2=document.createElement(header);//Lege das neue Headerelement an
+          newh2.textContent=child.textContent;     //Setze den Textcontent des Headerelements auf das neue Headerelement
+          var newh=document.createElement("a");    //Lege das Linkelement an
+          newh.setAttribute("href", document.URL+"#"+counter);//Setze die Linkadresse + Anker
+          newh.appendChild(newh2);                 //Hänge die Überschrift unter den Link ein
+          document.body.insertBefore(document.createElement("br"),document.body.firstChild); //Füge einen Absatz in den Body ein
+          document.body.insertBefore(newh,document.body.firstChild);//Füge den Header in das Dokument ein
+}
+function insertFrame()
+{
+var children=document.body.childNodes;
+var counter=0;
+var max=children.length;
+  for(i=max-1;i>=0;i--){
+    switch(children[i].nodeName){
+     case "H1":
+     case "h1":
+     case "H2":
+     case "h2":
+     case "H3":
+     case "h3":
+     case "H4":
+     case "h4":
+     case "H5":
+     case "h5":
+     case "H6":   
+     case "h6":   costumize(children[i].nodeName,counter++,children[i]);//Rufe die Costumize Funktion für den Headerknoten auf
+		  i+=2;//Erhöhe i um 2 weil zwei neue Knoten hinzukamen
+		  max+=2;//Erhöhe auch max um zwei weil zwei neue Knoten hinzukamen
+		  break;
+     default:
+    }
+  }
+var header=document.createElement("h1");
+header.textContent="Inhaltsverzeichnis:";
+document.body.insertBefore(header,document.body.firstChild);
+}
+</script></head><body onLoad="insertFrame()">
+<h1>Kapitel 1</h1>
+Hier steht der Text von Kapitel 1
+<h2>Kapitel 1.1</h2>
+Hier steht der Text von Kapitel 1.1
+<h3>Kapitel 1.1.1</h3>
+Hier steht der Text von Kapitel 1.1.1
+<h1>Kapitel 2</h1>
+Hier steht der Text von Kapitel 2
+<h2>Kapitel 2.1</h2>
+Hier steht der Text von Kapitel 2.1
+<h3>Kapitel 2.2</h3>
+Hier steht der Text von Kapitel 2.2
+<h4>Kapitel 2.3</h4>
+Hier steht der Text von Kapitel 2.3
+</body>
+</html>
