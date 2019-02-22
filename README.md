@@ -1,6 +1,8 @@
 # Misc
 Miscellaneous smaller projects
 
+https://img.shields.io/github/languages/count/situx/Misc.svg
+
 ***
 MIPS Assembler:
 
